@@ -1,0 +1,290 @@
+/*-----------------------------------*\
+	$RESET
+\*-----------------------------------*/
+
+* {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+
+/*-----------------------------------*\
+	$CLEARFIX
+\*-----------------------------------*/
+
+.cf:before,
+.cf:after {
+	content: " ";
+	display: table;
+}
+
+.cf:after {
+	clear: both;
+}
+
+/*-----------------------------------*\
+	$SHARED
+\*-----------------------------------*/
+
+h1, h2, h3, p, ul, ol, dl, pre, table,
+.subtitle {
+	margin-bottom: 26px;
+	margin-bottom: 1.4rem;
+}
+
+ul ,ol {
+	padding-left: 26px;
+	padding-left: 1.4rem;
+}
+
+li > ul, li > ol {
+	margin-bottom: 0;
+}
+
+/*-----------------------------------*\
+	$TYPE
+\*-----------------------------------*/
+
+h1, h2, h3,
+.alpha, .beta, .gamma {
+	font-family: freight-sans-pro;
+}
+
+h1, .alpha {
+	font-size: 72px;
+	font-size: 3rem;
+	line-height: 1;
+	letter-spacing: -.03em;
+	font-weight: 200;
+}
+
+h2, .beta {
+	font-size: 48px;
+	font-size: 2rem;
+	letter-spacing: -.03em;
+}
+
+h3, .gamma, .subtitle {
+	font-size: 26px;
+	font-size: 1.4rem;
+	line-height: 1;
+	font-weight: 700;
+	color: rgba(0,0,0,.6);
+	display: block;
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+a {
+	color: #00aced;
+	text-decoration: none;
+}
+
+	a:hover {
+		text-decoration: underline;
+	}
+
+/*-----------------------------------*\
+	$CODE
+\*-----------------------------------*/
+
+code {
+	color: #666;
+	padding: 2px 4px 1px;
+	background-color: #f7f7fa;
+	border: 1px solid #e1e1e8;
+	border-color: rgba(0,0,0,0);
+	box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+	border-radius: .25em;
+	font-size: .75em;
+	vertical-align: top;
+}
+
+code, pre {
+	font-family: droid-sans-mono, Monaco, Courier, monospace;
+	font-size: .75em;
+	line-height: 2;
+	color: #45565F;
+	text-shadow: none;
+}
+
+li pre {
+	margin-top: 26px;
+	margin-top: 1.4rem;
+}
+
+pre, .prettyprint { /* Let's set up our code block colors */
+	white-space: pre-wrap;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	width: 100%;
+	padding: 13px 26px;
+	margin-left: -26px;
+	padding: .7rem 1.4rem;
+	margin-left: -1.4rem;
+	background-color: #042028;
+	-webkit-text-stroke:0.6px;
+}
+
+ol.linenums {
+	color: #4c666c;
+	margin: 0 0 0 40px;
+}
+
+ol.linenums li {
+	line-height: 18px;
+	padding-left: 12px;
+}
+
+/* Solarized (Dark) */
+
+.pln {
+	color: #BD3701;
+}
+
+.str {
+	color: #269186;
+}
+
+.kwd {
+	color: #738A0F;
+}
+
+.com {
+	color: #586175;
+	font-style:italic;
+}
+
+.typ {
+	color: #A57700;
+}
+
+.atn {
+	color: #586175;
+}
+
+.fun {
+	color: red;
+}
+
+.lit,
+.atv {
+	color: #279086;
+}
+
+.pun,
+.opn,
+.clo {
+	color: #576D74;
+}
+
+.tag,
+.dec,
+.var {
+	color: #268bd2;
+}
+
+/*-----------------------------------*\
+	$OBJECTS
+\*-----------------------------------*/
+
+.wrap {
+	max-width: 752px;
+	margin: 0 auto;
+	padding: 0 26px;
+	padding: 0 1.4rem;
+}
+
+.section {
+	background-image: -webkit-linear-gradient(rgba(0,0,0,.05), rgba(0,0,0,0));
+	background-image:    -moz-linear-gradient(rgba(0,0,0,.05), rgba(0,0,0,0));
+	background-image:     -ms-linear-gradient(rgba(0,0,0,.05), rgba(0,0,0,0));
+	background-image:      -o-linear-gradient(rgba(0,0,0,.05), rgba(0,0,0,0));
+	background-image:         linear-gradient(rgba(0,0,0,.05), rgba(0,0,0,0));
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	padding-top: 26px;
+	padding-bottom: 26px;
+	padding-top: 1.4rem;
+	padding-bottom: 1.4rem;
+}
+
+	.step-title {
+		margin-bottom: 0;
+	}
+
+/*-----------------------------------*\
+	$MAIN
+\*-----------------------------------*/
+
+html {
+	font: 112.5%/1.4 Helvetica Neue, Helvetica, Arial, sans-serif;
+	color: #222;
+	-webkit-font-smoothing: antialiased;
+}
+
+/*-----------------------------------*\
+	$HEADER
+\*-----------------------------------*/
+
+.site-header {
+	background-color: #00aced;
+	background-image: url(images/blacktocat.svg);
+	background-size: 160px;
+	background-size: 10rem;
+	background-repeat: no-repeat;
+	background-position: 85% center;
+	color: #fff;
+	box-shadow: none;
+}
+	
+	.site-title {
+		margin-bottom: 12px;
+		margin-bottom: .75rem;
+	}
+
+	.site-header .subtitle {
+		color: rgba(255,255,255,.6);
+		margin-bottom: 12px;
+		margin-bottom: .75rem;
+	}
+
+/*-----------------------------------*\
+	$STEPS
+\*-----------------------------------*/
+
+/*  $STEP-1
+=====================================*/
+
+
+
+/*  $STEP-2
+=====================================*/
+
+.step-2 {
+	background-color: #161018;
+	background-image: url(images/stars.jpg?v=1);
+	background-repeat: repeat-x;
+	background-position: center top;
+	color: rgba(255,255,255,.85);
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+}
+
+	.step-2 .subtitle, .step-2 h3 {
+		color: rgba(255,220,255,.7);
+	}
+
+/*-----------------------------------*\
+	$FOOTER
+\*-----------------------------------*/
+
+.site-footer {
+	background-color: rgba(0,0,0,.1);
+	color: rgba(0,0,0,.5);
+}
+
+	.site-footer a {
+		color: rgba(0,0,0,.9);
+	}

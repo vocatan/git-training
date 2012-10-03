@@ -1,66 +1,102 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Github Workflow by daneden</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Getting started with Git</title>
+<link rel="stylesheet" href="s.css">
+<script type="text/javascript" src="//use.typekit.net/lst7okz.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body onload="prettyPrint();">
+	<header class="site-header section" role="banner">
+		<div class="wrap">
+			<h1 class="site-title">Git Going</h1>
+			<h2 class="subtitle">A simple guide to integrating Git &amp; Github to your workflow</h2>
+		</div>
+	</header>
+	<section class="intro section">
+		<div class="wrap">
+			<p>Hello! My name is <a href="http://twitter.com/_dte">Dan Eden</a>, and I recently updated <a href="http://daneden.me/2012/09/changing-my-ways/">my workflow</a> to include Git and GitHub. It&rsquo;s made my work more portable, my workflow <a href="http://www.openlogic.com/wazi/bid/188103/Stop-Using-FTP-How-to-Transfer-Files-Securely">more secure</a>, and helped me learn more about the command line interface, thus making me <a href="http://bukk.it/boss.gif">look awesome</a>.</p>
+			<p>But what&rsquo;s the point in looking and acting smart if you can&rsquo;t help the rest of the world look and act smart too? There isn&rsquo;t one. So I made this short tutorial on how to get Git and Github integrated into your workflow.</p>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Github Workflow</h1>
-        <p>A quick tutorial for getting up and running with GitHub locally and remotely</p>
+			<h2 class="gamma">Need-to-knows</h2>
+			<p>This tutorial is going to assume a few things. Namely:</p>
+			<ul>
+				<li>You have a <a href="http://github.com">GitHub</a> account</li>
+				<li>You know <a href="http://try.github.com/levels/1/challenges/1">the basics</a> of using Git</li>
+				<li>You have SSH access to a Linux-based server with Git already installed</li>
+				<li>You have a <a href="http://www.lukejones.me/articles/set-up-a-local-server-on-os-x/">local development environment</a> set up already</li>
+				<li>You&rsquo;re using a Mac (Windows users, you&rsquo;re probably smart enough to follow along and translate for your platform) and have <a href="http://mac.github.com">GitHub for Mac</a> (or <a href="http://windows.github.com">Windows</a>) installed</li>
+			</ul>
+			<p>Got all that? Excellent. Let&rsquo;s get started. In the examples below, we&rsquo;ll be adjusting our FTP-based workflow on an existing site to integrate Git and GitHub.</p>
+		</div>
+	</section>
+	<section class="step-1 section">
+		<div class="wrap">
+			<h2 class="step-title">Step 1</h2>
+			<span class="subtitle">Setting up repositories</span>
+			<p>First things first. We need repositories on our local environment, our GitHub account, and our remote website. The first two are easy.</p>
+			<ol>
+				<li>In GitHub, click the &ldquo;Create a new repo&rdquo; link. Give the repository a name (like example.com), a description, and choose whether to make it public or private. Private repos are definitely a good idea for client and personal work, but require a paid plan.</li>
+				<li>On the next page, click &ldquo;Setup in Mac.&rdquo; GitHub for Mac will open, where you can choose a location for the repository (somewhere you can access it via your local server)</li>
+			</ol>
+			<p>Great - now you can make changes on your local copy and it&rsquo;ll sync up to GitHub. But we&rsquo;re still missing the clever part - getting those changes from GitHub to the remote server.</p>
+			<p>So our next step is setting up the repository on the remote server. Let&rsquo;s do that now.</p>
+			<ol>
+				<li>Open up a terminal and SSH into your remote server (<code>ssh example.com</code>)</li>
+				<li>Navigate to the folder where you want the repository. In this example, the files are all in <code>example.com/html/</code>, so that's where we want our repo.</li>
+				<li>Initialise a git repository with <code>git init</code></li>
+				<li>Add the GitHub repo as a remote with <code>git remote add origin git@github.com:daneden/example.com.git</code></li>
+				<li>This next step is a little more complicated. Long story short, you need to tell the local master branch to track the remote master branch. To do that, you should edit <code>.git/config</code> and add the following code to the bottom:
+					<pre class="prettyprint">[branch "master"]
+	remote = origin
+	merge = refs/heads/master</pre></li>
+				<li>Finally, add your files with <code>git add .</code>, commit with <code>git commit -am "Initial commit"</code> and push to GitHub with <code>git push origin master</code> (Note that in future, you'll only need to use <code>git push</code>)</li>
+			</ol>
+			<p>If you&rsquo;ve gotten this far, well done. After you sync your local repo in GitHub for Mac one more time, you&rsquo;ll have identical copies of your site on your local server, remote server, and on GitHub. Give yourself a <a href="http://bukk.it/high-five.gif">high five</a>.</p>
+		</div>
+	</section>
+	<section class="step-2 section">
+		<div class="wrap">
+			<h2 class="step-title">Step 2</h2>
+			<span class="subtitle">.gitignore, WebHooks, and other smart stuff</span>
+			<p>I&rsquo;m willing to bet that the files you now have three instances of combine to form some sort of database-driven web application. And I&rsquo;m willing to bet you have a different database configuration on your local server than your remote. You want to tell Git to ignore your database configuration files so that you don&rsquo;t end up with local database settings on the web, and vice versa.</p>
+			<p>Create a file called <code>.gitignore</code> inside your repository. In there, you can make a list of all the files you want Git to ignore. For instance, in WordPress you&rsquo;ll want to ignore <code>wp-config.php</code>, so the contents of your <code>.gitignore</code> file might simply be:</p>
+			<pre class="prettyprint">wp-content.php</pre>
+			<p>You can ignore files with a particular extension, and recognize files in previously ignored locations:</p>
+			<pre class="prettyprint"># Ignore these files and folders
+wp-config.php
+wp-content/uploads/*
 
-        <p class="view"><a href="https://github.com/daneden/github-workflow">View the Project on GitHub <small>daneden/github-workflow</small></a></p>
+# Ignore data and junk files
+*.DS_Store
+*Thumbs.DB
 
+# Recognise these files in previously ignored locations
+!wp-content/uploads/.htaccess</pre>
+			<p>Commit and sync the repo, and it&rsquo;ll go on up to GitHub too. But wait a second, we&rsquo;re <em>still</em> missing that final step - getting our code from GitHub to the remote server. Well, we need one more file for that.</p>
 
-        <ul>
-          <li><a href="https://github.com/daneden/github-workflow/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/daneden/github-workflow/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/daneden/github-workflow">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h3>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/daneden">daneden</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
-</html>
+			<h3>The final touch</h3>
+			<p>Create a PHP file - the name doesn&rsquo;t matter, just don&rsquo;t make it easy to guess - with the following contents:</p>
+			<pre class="prettyprint">&lt;?php
+	`git pull`;</pre>
+			<p>Commit, sync, then SSH back into your server and run <code>git pull</code> inside your remote repository.</p>
+			<p>Once you&rsquo;ve done that, go to the Admin section of your GitHub repository and click on &ldquo;Service Hooks.&rdquo; Click on &ldquo;WebHook URLs&rdquo; and enter the URL for the script you created a few minutes ago.</p>
+			<p>Take a deep breath, then click &ldquo;Update Settings.&rdquo; Congratulations. You are awesome. From now on, any changes that you make to your Git repository - locally, remotely (with <code>git push</code>), or on GitHub.com will be pushed live to your site.</p>
+		</div>
+	</section>
+	<section class="step-3 section">
+		<div class="wrap">
+			<h2 class="step-title">Step 3</h2>
+			<span class="subtitle">Make this guide better</span>
+			<p>With any luck, this short guide has helped you to get Git and Github integrated in your workflow. But it was written by a designer (yuck! Am I right, developers?) who&rsquo;s new to all this stuff. There are bound to be missing steps, typos, and downright stupidness in the information above.</p>
+			<p>Luckily, this entire guide is on <a href="https://github.com/daneden/github-workflow">GitHub</a>, meaning that you can fork it and improve it for yourself and other people.</p>
+			<p>If you found this guide useful, (or if you hated it) please let me know by <a href="http://twitter.com/_dte">tweeting</a> me. If you <em>really</em> liked it, you could <a href="https://twitter.com/share?url=https%3A%2F%2Fdaneden.github.com%2Fgithub-workflow&amp;text=Git%20Going%20-%20A%20quick%20guide%20to%20integrating%20Git%20and%20@github%20into%20your%20workflow&amp;via=_dte">share it on Twitter.</a></p>
+		</div>
+	</section>
+	<footer class="site-footer section">
+		<div class="wrap">
+			<p>Created with love by <a href="http://twitter.com/_dte">Daniel Eden</a>. I ❤ <a href="http://github.com">GitHub</a>.</p>
+		</div>
+	</footer>
+	<script src="scripts/prettify.js">
