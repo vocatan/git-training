@@ -62,7 +62,7 @@
 			<span class="subtitle">.gitignore, WebHooks, and other smart stuff</span>
 			<p>I&rsquo;m willing to bet that the files you now have three instances of combine to form some sort of database-driven web application. And I&rsquo;m willing to bet you have a different database configuration on your local server than your remote. You want to tell Git to ignore your database configuration files so that you don&rsquo;t end up with local database settings on the web, and vice versa.</p>
 			<p>Create a file called <code>.gitignore</code> inside your repository. In there, you can make a list of all the files you want Git to ignore. For instance, in WordPress you&rsquo;ll want to ignore <code>wp-config.php</code>, so the contents of your <code>.gitignore</code> file might simply be:</p>
-			<pre class="prettyprint">wp-content.php</pre>
+			<pre class="prettyprint">wp-config.php</pre>
 			<p>You can ignore files with a particular extension, and recognize files in previously ignored locations:</p>
 			<pre class="prettyprint"># Ignore these files and folders
 wp-config.php
