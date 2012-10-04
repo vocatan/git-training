@@ -47,11 +47,7 @@
 				<li>Navigate to the folder where you want the repository. In this example, the files are all in <code>example.com/html/</code>, so that's where we want our repo.</li>
 				<li>Initialise a git repository with <code>git init</code></li>
 				<li>Add the GitHub repo as a remote with <code>git remote add origin git@github.com:daneden/example.com.git</code></li>
-				<li>This next step is a little more complicated. Long story short, you need to tell the local master branch to track the remote master branch. To do that, you should edit <code>.git/config</code> and add the following code to the bottom:
-					<pre class="prettyprint">[branch "master"]
-	remote = origin
-	merge = refs/heads/master</pre></li>
-				<li>Finally, add your files with <code>git add .</code>, commit with <code>git commit -am "Initial commit"</code> and push to GitHub with <code>git push origin master</code> (Note that in future, you'll only need to use <code>git push</code>)</li>
+				<li>Finally, add your files with <code>git add .</code>, commit with <code>git commit -m "Initial commit"</code> and push to GitHub with <code>git push -u origin master</code> (Note the <code>-u</code> flag which sets up tracking, meaning in future you'll only need to use <code>git push</code>)</li>
 			</ol>
 			<p>If you&rsquo;ve gotten this far, well done. After you sync your local repo in GitHub for Mac one more time, you&rsquo;ll have identical copies of your site on your local server, remote server, and on GitHub. Give yourself a <a href="http://bukk.it/high-five.gif">high five</a>.</p>
 		</div>
